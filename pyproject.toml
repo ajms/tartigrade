@@ -1,0 +1,32 @@
+[project]
+authors = [{ name = "ajms", email = "albert.schulz@posteo.de" }]
+description = "Add a short description here"
+name = "tartigrade"
+requires-python = ">= 3.11"
+version = "0.1.0"
+
+[build-system]
+build-backend = "hatchling.build"
+requires = ["hatchling"]
+
+[tool.pixi.project]
+channels = ["nvidia/label/cuda-12.1.0", "nvidia", "conda-forge", "pytorch"]
+platforms = ["win-64", "linux-64", "osx-64", "osx-arm64"]
+
+[tool.pixi.pypi-dependencies]
+tartigrade = { path = ".", editable = true }
+
+[tool.pixi.tasks]
+
+[tool.pixi.dependencies]
+python = ">=3.13.0,<4"
+
+[tool.pixi.feature.dev.dependencies]
+pytest = "*"
+ruff = "*"
+
+[tool.pixi.feature.dev.tasks]
+run_tests = "pytest -vv"
+
+[tool.pixi.environments]
+dev = { features = ["dev"], solve-group = "default" }
